@@ -8,7 +8,7 @@ class DamInventory(TethysAppBase):
 
     name = 'Dam Inventory'
     index = 'dam_inventory:home'
-    icon = 'dam_inventory/images/icon.gif'
+    icon = 'dam_inventory/images/tethys_cluster.png'
     package = 'dam_inventory'
     root_url = 'dam-inventory'
     color = '#006666'

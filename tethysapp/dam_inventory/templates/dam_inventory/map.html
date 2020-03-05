@@ -10,14 +10,26 @@
 
 {% block app_content %}
 
+<p>My Map</p>
 
 
 <div id="mapid"></div>
 
-
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
    crossorigin=""></script>
+
+<style>
+#mapid {
+    height: 600px;
+    width: 70%;
+    margin: auto;
+    margin-top: 50px;
+}
+</style>
 
 <script>
 var mymap = L.map('mapid').setView([40.52, -111.86], 1.5);
@@ -28,17 +40,22 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     tileSize: 512,
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoibmxpbnRvbjI0IiwiYSI6ImNrNnUwcnRidTA1Mzkza3FwaDM1aTRocm8ifQ.mqo3juol2aCkmaremutQDQ'
-}).addTo(mymap);</script>
+}).addTo(mymap);
 
-<style>
-   #mapid {
-    height: 600px;
-    width: 70%;
-    margin: auto;
-    margin-top: 50px;
-    /*float: center;*/
-}
-</style>
+ var layer = L.tileLayer.wms('https://geoserver.hydroshare.org/geoserver/HS-bd70a1dc8595428db3ae8eacd0ed4f76/wms?', {
+            layers: 'Countries_Visited',
+            format: 'image/png',
+            transparent: true,
+        }).addTo(mymap);
+
+ var Layer = L.tileLayer.wms('https://geoserver.hydroshare.org/geoserver/HS-bd70a1dc8595428db3ae8eacd0ed4f76/wms?', {
+            layers: 'Want_to_Visit',
+            format: 'image/png',
+            transparent: true,
+        }).addTo(mymap);
+
+</script>
+
 
 {% endblock %}
 
